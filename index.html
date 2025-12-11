@@ -1,1 +1,250 @@
-index.html
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FreeTools — Fast, Mobile-first Utility Tools</title>
+  <meta name="description" content="FreeTools: Fast free utilities — Image Viewer, Age Calculator, Password Generator, Fake Name Generator, Text-to-Speech. Adsterra-ready, mobile responsive, SEO optimized." />
+  <meta name="keywords" content="free tools, online tools, password generator, age calculator, image viewer, text to speech, download" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Tailwind via CDN (good for quick single-file prototype) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Basic structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FreeTools",
+    "url": "https://yourdomain.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://yourdomain.com/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <style>
+    /* Small helpful UI tweaks */
+    .ad-placeholder {border:2px dashed rgba(0,0,0,0.08); padding:12px; border-radius:8px; text-align:center}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
+      <!-- Logo (editable SVG) -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold">FT</div>
+        <div>
+          <h1 class="text-lg font-semibold">FreeTools</h1>
+          <p class="text-xs text-gray-500">Fast, mobile-first utilities</p>
+        </div>
+      </div>
+
+      <div class="ml-auto flex items-center gap-3">
+        <a href="#tools" class="text-sm px-3 py-2 rounded-md hover:bg-gray-100">Tools</a>
+        <a href="#about" class="text-sm px-3 py-2 rounded-md hover:bg-gray-100">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-6">
+    <!-- Top hero and Adsterra Social Bar placeholder -->
+    <section class="mb-6">
+      <div class="rounded-lg bg-white p-5 shadow-sm">
+        <h2 class="text-2xl font-bold">Free Tools — Start using now</h2>
+        <p class="mt-2 text-gray-600">Mobile-friendly, privacy-first tools. Place your Adsterra ad codes in the placeholders.</p>
+
+        <!-- Ad placeholder for Social Bar / Native -->
+        <div id="ad-top" class="ad-placeholder mt-4">Adsterra: Paste Native/Social bar code here</div>
+      </div>
+    </section>
+
+    <!-- Tools grid -->
+    <section id="tools" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Tool 1: Image Viewer (paste URL or upload) -->
+      <article class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="font-semibold">Image Viewer — Paste URL or Upload</h3>
+        <p class="text-sm text-gray-500 mt-1">View full-size profile pictures, wallpapers, or any image URL.</p>
+        <div class="mt-3 flex gap-2">
+          <input id="imgUrl" placeholder="Paste image URL" class="flex-1 rounded-md border px-3 py-2" />
+          <button id="loadUrl" class="px-3 py-2 bg-indigo-600 text-white rounded-md">Load</button>
+        </div>
+        <div class="mt-3 flex gap-2">
+          <input id="imgFile" type="file" accept="image/*" class="rounded-md" />
+        </div>
+        <div class="mt-3 border rounded-md overflow-hidden">
+          <img id="viewer" src="" alt="preview" class="w-full object-contain max-h-72 bg-gray-100" />
+        </div>
+        <div class="mt-3 flex gap-2">
+          <a id="downloadImg" class="inline-block px-3 py-2 bg-green-600 text-white rounded-md hidden">Download Image</a>
+        </div>
+      </article>
+
+      <!-- Tool 2: Age Calculator -->
+      <article class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="font-semibold">Age Calculator</h3>
+        <p class="text-sm text-gray-500 mt-1">Enter your date of birth to calculate exact age.</p>
+        <div class="mt-3">
+          <input id="dob" type="date" class="w-full rounded-md border px-3 py-2" />
+          <button id="calcAge" class="mt-3 px-3 py-2 bg-indigo-600 text-white rounded-md">Calculate Age</button>
+          <p id="ageResult" class="mt-3 text-sm text-gray-700"></p>
+        </div>
+      </article>
+
+      <!-- Tool 3: Password Generator -->
+      <article class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="font-semibold">Password Generator</h3>
+        <p class="text-sm text-gray-500 mt-1">Generate secure passwords quickly.</p>
+        <div class="mt-3 flex items-center gap-2">
+          <input id="len" type="number" min="4" max="64" value="12" class="w-24 rounded-md border px-3 py-2" />
+          <label class="text-sm">length</label>
+        </div>
+        <div class="mt-3 flex gap-2">
+          <button id="genPass" class="px-3 py-2 bg-indigo-600 text-white rounded-md">Generate</button>
+          <button id="copyPass" class="px-3 py-2 bg-gray-100 rounded-md">Copy</button>
+        </div>
+        <pre id="passOut" class="mt-3 bg-gray-50 p-3 rounded-md overflow-x-auto"></pre>
+      </article>
+
+      <!-- Tool 4: Fake Name Generator -->
+      <article class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="font-semibold">Fake Name Generator</h3>
+        <p class="text-sm text-gray-500 mt-1">Generate random realistic names for testing/profiles.</p>
+        <div class="mt-3 flex gap-2">
+          <select id="gender" class="rounded-md border px-3 py-2">
+            <option value="any">Any</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <button id="genName" class="px-3 py-2 bg-indigo-600 text-white rounded-md">Generate</button>
+        </div>
+        <div class="mt-3">
+          <pre id="nameOut" class="bg-gray-50 p-3 rounded-md"></pre>
+        </div>
+      </article>
+
+      <!-- Tool 5: Text to Speech (Web Speech API) -->
+      <article class="bg-white p-4 rounded-lg shadow-sm">
+        <h3 class="font-semibold">Text → Speech</h3>
+        <p class="text-sm text-gray-500 mt-1">Type text and play it back using your browser's TTS.</p>
+        <textarea id="ttsText" rows="4" placeholder="Type something..." class="w-full rounded-md border px-3 py-2"></textarea>
+        <div class="mt-3 flex gap-2">
+          <button id="speakBtn" class="px-3 py-2 bg-indigo-600 text-white rounded-md">Speak</button>
+          <button id="stopBtn" class="px-3 py-2 bg-gray-100 rounded-md">Stop</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Middle ad placeholder (Native/Content) -->
+    <section class="mt-6">
+      <div id="ad-middle" class="ad-placeholder">Adsterra: Paste Native ad code / responsive ad unit here</div>
+    </section>
+
+    <!-- About / SEO content -->
+    <section id="about" class="mt-6 bg-white p-5 rounded-lg shadow-sm">
+      <h3 class="font-semibold">About FreeTools</h3>
+      <p class="mt-2 text-gray-600">This single-file demo is optimized for fast loading, mobile-first UX, and easy deployment to Cloudflare Pages / GitHub Pages. Each tool is client-side (no backend required) so it works instantly for users and is crawlable by search engines. Add 100–300 words of unique content per tool page for better SEO.</p>
+
+      <!-- Bottom ad placeholder (Large) -->
+      <div id="ad-bottom" class="ad-placeholder mt-4">Adsterra: Paste large responsive ad / in-content native ad here</div>
+    </section>
+
+    <footer class="mt-6 text-center text-sm text-gray-500">© <span id="year"></span> FreeTools • Built for speed • Deploy on Cloudflare Pages</footer>
+  </main>
+
+  <script>
+    // small helpers and tool implementations
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Image Viewer ---
+    const viewer = document.getElementById('viewer');
+    const downloadBtn = document.getElementById('downloadImg');
+    document.getElementById('loadUrl').addEventListener('click', ()=>{
+      const url = document.getElementById('imgUrl').value.trim();
+      if(!url) return alert('Please paste an image URL');
+      viewer.src = url;
+      downloadBtn.href = url; downloadBtn.style.display='inline-block';
+    });
+    document.getElementById('imgFile').addEventListener('change', (e)=>{
+      const f = e.target.files[0];
+      if(!f) return;
+      const reader = new FileReader();
+      reader.onload = (ev)=>{
+        viewer.src = ev.target.result;
+        downloadBtn.href = ev.target.result;
+        downloadBtn.style.display='inline-block';
+      }
+      reader.readAsDataURL(f);
+    });
+
+    // --- Age Calculator ---
+    document.getElementById('calcAge').addEventListener('click', ()=>{
+      const dob = document.getElementById('dob').value;
+      if(!dob) return alert('Select your date of birth');
+      const birth = new Date(dob);
+      const now = new Date();
+      let years = now.getFullYear() - birth.getFullYear();
+      let months = now.getMonth() - birth.getMonth();
+      let days = now.getDate() - birth.getDate();
+      if(days < 0) { months -= 1; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+      if(months < 0) { years -= 1; months += 12; }
+      document.getElementById('ageResult').textContent = `${years} years, ${months} months, ${days} days`;
+    });
+
+    // --- Password Generator ---
+    function genPassword(len){
+      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+      let out = '';
+      for(let i=0;i<len;i++) out += chars.charAt(Math.floor(Math.random()*chars.length));
+      return out;
+    }
+    document.getElementById('genPass').addEventListener('click', ()=>{
+      const len = parseInt(document.getElementById('len').value) || 12;
+      const p = genPassword(len);
+      document.getElementById('passOut').textContent = p;
+    })    document.getElementById('copyPass').addEventListener('click', ()=>{
+      const txt = document.getElementById('passOut').textContent;
+      if(!txt) return;
+      navigator.clipboard.writeText(txt).then(()=> alert('Password copied'));
+    });
+
+    // --- Fake Name Generator ---
+    const maleFirst = ['Arman','Rafi','Tanim','Jamil','Sabbir','Rashed'];
+    const femaleFirst = ['Nusrat','Puja','Mitu','Sima','Rina','Tanjila'];
+    const lastNames = ['Ahmed','Hossain','Khan','Rahman','Chowdhury','Siddique'];
+    document.getElementById('genName').addEventListener('click', ()=>{
+      const gender = document.getElementById('gender').value;
+      let first;
+      if(gender==='male') first = maleFirst[Math.floor(Math.random()*maleFirst.length)];
+      else if(gender==='female') first = femaleFirst[Math.floor(Math.random()*femaleFirst.length)];
+      else first = (Math.random()>0.5? maleFirst[Math.floor(Math.random()*maleFirst.length)]: femaleFirst[Math.floor(Math.random()*femaleFirst.length)]);
+      const last = lastNames[Math.floor(Math.random()*lastNames.length)];
+      document.getElementById('nameOut').textContent = `${first} ${last}`;
+    });
+
+    // --- Text to Speech ---
+    let synth = window.speechSynthesis;
+    let utter;
+    document.getElementById('speakBtn').addEventListener('click', ()=>{
+      const t = document.getElementById('ttsText').value.trim();
+      if(!t) return alert('Write some text first');
+      if(utter) synth.cancel();
+      utter = new SpeechSynthesisUtterance(t);
+      synth.speak(utter);
+    });
+    document.getElementById('stopBtn').addEventListener('click', ()=>{
+      if(synth) synth.cancel();
+    });
+
+    // NOTE: This is a single-file demo for quick prototyping. For production:
+    // 1) Split tools into separate pages for SEO, add 100-300 unique words per tool.
+    // 2) Place Adsterra ad code in the placeholders (#ad-top, #ad-middle, #ad-bottom). Keep one popunder only and follow Adsterra TOS.
+    // 3) Add server-side endpoints if you want features that require scraping (e.g., YouTube thumbnail fetch) — avoid violating third-party TOS.
+    // 4) Deploy to Cloudflare Pages / GitHub Pages: push this file to a repo and connect site on Cloudflare Pages. Use proper domain + HTTPS.
+
+  </script>
+</body>
+</html>
